@@ -24,6 +24,12 @@ use pocketmine\utils\TextFormat;
 use ChestLocker\Main;
 
 class UnlockChest extends PluginBase{
+
+    /**
+     * @var Main|null
+     */
+    private $plugin = null;
+
 	public function __construct(Main $plugin){
 		$this->plugin = $plugin;
 	}

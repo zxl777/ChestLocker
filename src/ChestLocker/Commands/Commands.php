@@ -12,18 +12,18 @@
 namespace ChestLocker\Commands;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\permission\Permission;
 use pocketmine\command\Command;
-use pocketmine\command\CommandExecutor;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
-use pocketmine\Server;
-use pocketmine\utils\Config;
-use pocketmine\utils\TextFormat;
 
 use ChestLocker\Main;
 
 class Commands extends PluginBase{
+
+    /**
+     * @var Main|null
+     */
+    private $plugin = null;
+
 	public function __construct(Main $plugin){
 		$this->plugin = $plugin;
 	}
