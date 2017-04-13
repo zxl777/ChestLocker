@@ -51,15 +51,12 @@ class EventListener extends PluginBase implements Listener {
                 //Check Command status
                 //0
                 if ($this->plugin->getCommandStatus($event->getPlayer()->getName()) == 0) {
-                    //Check bypass permission
-                    if ($event->getPlayer()->hasPermission("chestlocker.bypass") == false) {
-                        //Check if Chest is registered
-                        $paired = $chest->getPair();
-                        if ($this->plugin->isChestRegistered($chest->getLevel()->getName(), $chest->getX(), $chest->getY(), $chest->getZ()) && $this->plugin->getChestOwner($chest->getLevel()->getName(), $chest->getX(), $chest->getY(), $chest->getZ()) != strtolower($event->getPlayer()->getName()) || $paired != null && $this->plugin->isChestRegistered($paired->getLevel()->getName(), $paired->getX(), $paired->getY(), $paired->getZ()) && $this->plugin->getChestOwner($paired->getLevel()->getName(), $paired->getX(), $paired->getY(), $paired->getZ()) != strtolower($event->getPlayer()->getName())) {
+                    //Check if Chest is registered
+                    $paired = $chest->getPair();
+                    if ($this->plugin->isChestRegistered($chest->getLevel()->getName(), $chest->getX(), $chest->getY(), $chest->getZ()) && $this->plugin->getChestOwner($chest->getLevel()->getName(), $chest->getX(), $chest->getY(), $chest->getZ()) != strtolower($event->getPlayer()->getName()) || $paired != null && $this->plugin->isChestRegistered($paired->getLevel()->getName(), $paired->getX(), $paired->getY(), $paired->getZ()) && $this->plugin->getChestOwner($paired->getLevel()->getName(), $paired->getX(), $paired->getY(), $paired->getZ()) != strtolower($event->getPlayer()->getName())) {
 
-                            $event->setCancelled(true);
-                            $event->getPlayer()->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&4You aren't the owner of this " . Main::ITEM_NAME_2 . "."));
-                        }
+                        $event->setCancelled(true);
+                        $event->getPlayer()->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&4You aren't the owner of this " . Main::ITEM_NAME_2 . "."));
                     }
                 }
 
@@ -87,7 +84,7 @@ class EventListener extends PluginBase implements Listener {
                 if ($this->plugin->getCommandStatus($event->getPlayer()->getName()) == 2) {
                     //Check if Chest is registered
                     if ($this->plugin->isChestRegistered($chest->getLevel()->getName(), $chest->getX(), $chest->getY(), $chest->getZ())) {
-                        if ($event->getPlayer()->hasPermission("chestlocker.bypass") == false && $this->plugin->getChestOwner($chest->getLevel()->getName(), $chest->getX(), $chest->getY(), $chest->getZ()) != strtolower($event->getPlayer()->getName())) {
+                        if ($this->plugin->getChestOwner($chest->getLevel()->getName(), $chest->getX(), $chest->getY(), $chest->getZ()) != strtolower($event->getPlayer()->getName())) {
                             $event->getPlayer()->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&4You aren't the owner of this " . Main::ITEM_NAME_2 . "."));
                         } else {
                             $event->getPlayer()->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&2" . Main::ITEM_NAME . " unlocked"));
@@ -120,8 +117,7 @@ class EventListener extends PluginBase implements Listener {
                 $paired = $chest->getPair();
                 //Check if chest is registered
                 if ($this->plugin->isChestRegistered($level, $x, $y, $z)) {
-                    //Check bypass permission
-                    if ($event->getPlayer()->hasPermission("chestlocker.bypass") == false && ($this->plugin->isChestRegistered($chest->getLevel()->getName(), $chest->getX(), $chest->getY(), $chest->getZ()) && $this->plugin->getChestOwner($level, $x, $y, $z) != strtolower($event->getPlayer()->getName()) || $paired != null && $this->plugin->isChestRegistered($paired->getLevel()->getName(), $paired->getX(), $paired->getY(), $paired->getZ()) && $this->plugin->getChestOwner($paired->getLevel()->getName(), $paired->getX(), $paired->getY(), $paired->getZ()) != strtolower($event->getPlayer()->getName()))) {
+                    if (($this->plugin->isChestRegistered($chest->getLevel()->getName(), $chest->getX(), $chest->getY(), $chest->getZ()) && $this->plugin->getChestOwner($level, $x, $y, $z) != strtolower($event->getPlayer()->getName()) || $paired != null && $this->plugin->isChestRegistered($paired->getLevel()->getName(), $paired->getX(), $paired->getY(), $paired->getZ()) && $this->plugin->getChestOwner($paired->getLevel()->getName(), $paired->getX(), $paired->getY(), $paired->getZ()) != strtolower($event->getPlayer()->getName()))) {
                         $player->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&4You aren't the owner of this " . Main::ITEM_NAME_2 . "."));
                         $event->setCancelled(true);
                     } else {

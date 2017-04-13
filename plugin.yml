@@ -20,7 +20,7 @@ permissions:
   description: ChestLocker permissions.
   children:
    chestlocker.bypass:
-    default: op
+    default: false
     description: Bypass Chest lock.
    chestlocker.commands:
     default: true
