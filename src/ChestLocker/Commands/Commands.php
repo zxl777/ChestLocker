@@ -28,7 +28,8 @@ class Commands extends PluginBase{
 		$this->plugin = $plugin;
 	}
 	
-	public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
+	public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool{
+// 	public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
     	switch(strtolower($cmd->getName())){
     		case "chestlocker":
     			if(isset($args[0])){
@@ -78,5 +79,8 @@ class Commands extends PluginBase{
     					}
     				}
     			}
+				return true;
+		default:
+				return false;
 	  }
 }
