@@ -33,10 +33,11 @@ class LockChest extends PluginBase{
 	public function __construct(Main $plugin){
 		$this->plugin = $plugin;
 	}
-	
-	public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
+
+    public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool{
 		switch(strtolower($cmd->getName())){
 			case "lockchest":
+            {
 				if($sender->hasPermission("chestlocker.commands.lockchest")){
 					//Player Sender
 					if($sender instanceof Player){
@@ -58,6 +59,10 @@ class LockChest extends PluginBase{
 					break;
 				}
 				return true;
+            }
+
+            default:
+                return false;
 		}
 	}
 }

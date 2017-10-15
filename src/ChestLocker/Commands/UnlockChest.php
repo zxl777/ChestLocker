@@ -33,32 +33,33 @@ class UnlockChest extends PluginBase{
 	public function __construct(Main $plugin){
 		$this->plugin = $plugin;
 	}
-	
-	public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-		switch(strtolower($cmd->getName())){
-			case "unlockchest":
-				if($sender->hasPermission("chestlocker.commands.unlockchest")){
-					//Player Sender
-					if($sender instanceof Player){
-						if($this->plugin->getCommandStatus($sender->getName()) == 0 || $this->plugin->getCommandStatus($sender->getName()) == 1){
-							$this->plugin->setCommandStatus(2, $sender->getName());
-							$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&2" . Main::ITEM_NAME . " unlock command enabled. Click the " . Main::ITEM_NAME_2 . " to unlock"));
-						}else{
-							$this->plugin->setCommandStatus(0, $sender->getName());
-							$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&4" . Main::ITEM_NAME . " unlock command disabled."));
-						}
-					}
-					//Console Sender
-					else{
-						$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&cYou can only perform this command as a player"));
-						return true;
-					}
-				}else{
-					$sender->sendMessage($this->plugin->translateColors("&", "&cYou don't have permissions to use this command"));
-					break;
-				}
-				return true;
-			}
-		
+
+    public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool{
+		switch(strtolower($cmd->getName())) {
+            case "unlockchest": {
+                if ($sender->hasPermission("chestlocker.commands.unlockchest")) {
+                    //Player Sender
+                    if ($sender instanceof Player) {
+                        if ($this->plugin->getCommandStatus($sender->getName()) == 0 || $this->plugin->getCommandStatus($sender->getName()) == 1) {
+                            $this->plugin->setCommandStatus(2, $sender->getName());
+                            $sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&2" . Main::ITEM_NAME . " unlock command enabled. Click the " . Main::ITEM_NAME_2 . " to unlock"));
+                        } else {
+                            $this->plugin->setCommandStatus(0, $sender->getName());
+                            $sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&4" . Main::ITEM_NAME . " unlock command disabled."));
+                        }
+                    } //Console Sender
+                    else {
+                        $sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&cYou can only perform this command as a player"));
+                        return true;
+                    }
+                } else {
+                    $sender->sendMessage($this->plugin->translateColors("&", "&cYou don't have permissions to use this command"));
+                    break;
+                }
+                return true;
+            }
+            default:
+                return false;
+        }
 	}
 }
