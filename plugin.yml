@@ -1,12 +1,8 @@
 name: ChestLocker
 main: ChestLocker\Main
-<<<<<<< HEAD
+
 version: "1.5"
 api: [3.0.0,3.0.0-ALPHA10, 3.0.0-ALPHA11, 3.0.0-ALPHA12, 3.0.0-ALPHA13,]
-=======
-version: "1.3"
-api: [3.0.0-ALPHA8,3.0.0-ALPHA9,3.0.0-ALPHA10]
->>>>>>> 498fb149ce2899c8aa0dd4a640e6a0b4de0ab735
 load: STARTUP
 author: EvolSoft
 description: Lock/Unlock Chests.
